@@ -15,9 +15,14 @@ export const resolvers = {
             return newUser
         },
         deleteUser(parent, args) {
-            const deletedUser = users.find(({ name }) => name == args.name)
+            const deletedUser = users.find(({ name }) => name == args.name) //returns an element from the array
             console.log(deletedUser)
             // delete user logic from an Array <users>
+            for (var i = users.length - 1; i >= 0; i--) {
+                if (deletedUser.name === users[i].name) {
+                 users.splice(i, 1);
+                }
+            }
             pubsub.publish('TRIGGER_DELETED_USER', { deletedUser });
             return deletedUser
         }

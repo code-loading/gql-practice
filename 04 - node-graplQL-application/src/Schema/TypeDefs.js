@@ -24,6 +24,7 @@ export const typeDefs = gql`
 # Subscription
     type Subscription {
         newUser: User!
+        deletedUser: User!
     }
 
 `

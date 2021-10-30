@@ -36,7 +36,7 @@ function GithubAPI() {
     //     console.log('GraphQL Response: ', res);
     // }
 
-    const fetchData_ql = async (organizationName) => {
+    const fetchData_ql = async (abc) => {
 
         const QUERY_ORGANIZATION = `query queryOrganization($organizationName: String!){
             organization(login: $organizationName) {
@@ -59,13 +59,15 @@ function GithubAPI() {
             }
         }`;
 
-        const res = await api.post('/graphql', {
+        const {data:{data: {organization,viewer}}} = await api.post('/graphql', {
             query: QUERY_ORGANIZATION,
             variables: {
-                organizationName
+                organizationName: abc
             }
         })
-        console.log('GraphQL Response: ', res);
+        // const org = res.data.data.organization;
+        // const viewer = res.data.data.viewer;
+        console.log('GraphQL Response: ', organization,viewer);
     }
 
     const addStart = async (repositoryId) => {
@@ -77,9 +79,10 @@ function GithubAPI() {
             }
         }`;
 
-        const { data: { data } } = await api.post('/graphql', {
+        const { data } = await api.post('/graphql', {
             variables: {
-                abc: repositoryId
+                // abc: repositoryId
+                organizationName: repositoryId
             },
             query: MUTATION_ADD_START,
         })
@@ -88,7 +91,9 @@ function GithubAPI() {
 
     useEffect(() => {
         // fetchData_ql("qutbITech")
-        addStart('MDEwOlJlcG9zaXRvcnkzODc1MTIzNjA=')
+        // addStart('MDEwOlJlcG9zaXRvcnkzODc1MTIzNjA=')
+        addStart("MDEwOlJlcG9zaXRvcnk0NTU2MDA=") //hhvm repo from fb
+        // addStart('facebook')
     }, [])
 
 

@@ -7,3 +7,11 @@ export const CREATE_USER_MUTATION = gql`
         }
     }
 `
+
+export const DELETE_USER_MUTATION = gql`
+    mutation deleteUser($n: String!) {
+        deleteUser(name: $n) {
+            name
+        }
+    }
+`

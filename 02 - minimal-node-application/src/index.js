@@ -43,51 +43,51 @@ const client = new ApolloClient({
 
 // // Query with Variables
 
-// const GET_ORG_DETAILS_VARIABLE = gql`
-//   query getOrganization($org: String!, $org2: String!){
-//     org1: organization(login: $org) {
-//       name
-//       url
-//       description
-//     }
-//     org2: organization(login: $org2) {
-//       name
-//       url
-//       description
-//     }
-//   }
-// `;
+const GET_ORG_DETAILS_VARIABLE = gql`
+  query getOrganization($org: String!, $org2: String!){
+    org1: organization(login: $org) {
+      name
+      url
+      description
+    }
+    org2: organization(login: $org2) {
+      name
+      url
+      description
+    }
+  }
+`;
 
-// client.query({
-//   query: GET_ORG_DETAILS_VARIABLE,
-//   variables: {
-//     org: "qutbITech",
-//     org2: "facebook"
-//   }
-// })
-// .then(res => console.log('GET_ORG_DETAILS_VARIABLE >>>', res))
-// .catch(err => console.log('Err: ', err));
+client.query({
+  query: GET_ORG_DETAILS_VARIABLE,
+  variables: {
+    org: "qutbITech",
+    org2: "facebook"
+  }
+})
+.then(res => console.log('GET_ORG_DETAILS_VARIABLE >>>', res))
+.catch(err => console.log('Err: ', err));
 
 
 
 
 // // MUTATION
 
-const ADD_STAR = gql`
-  mutation AddStartToMyRepo($repoId: ID!) {
-    addStar(input: { starrableId: $repoId }) {
-      starrable {
-        viewerHasStarred
-      }
-    }
-  }
-`
+// const ADD_STAR = gql`
+//   mutation AddStartToMyRepo($repoId: ID!) {
+//     addStar(input: { starrableId: $repoId }) {
+//       starrable {
+//         viewerHasStarred
+//       }
+//     }
+//   }
+// `
 
-client.mutate({
-  mutation: ADD_STAR,
-  variables: {
-    repoId: "MDEwOlJlcG9zaXRvcnkzODc1MTIzNjA="
-  }
-})
-  .then(d => console.log(JSON.stringify(d)))
-  .catch(err => console.log('Err: ', err));
+// client.mutate({
+//   mutation: ADD_STAR,
+//   variables: {
+//     repoId: "MDEwOlJlcG9zaXRvcnkzODc1MTIzNjA="
+//   }
+// })
+//   .then(d => console.log(JSON.stringify(d)))
+//   .catch(err => console.log('Err: ', err));

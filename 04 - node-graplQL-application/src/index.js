@@ -12,7 +12,17 @@ const PORT = process.env.PORT;
 const app = express();
 const httpServer = createServer(app);
 const schema = makeExecutableSchema({ typeDefs, resolvers });
-const server = new ApolloServer({ schema });
+const server = new ApolloServer({ schema,
+    plugins: [{
+      async serverWillStart() {
+        return {
+          async drainServer() {
+            subscriptionServer.close();
+          }
+        };
+      }
+    }], 
+});
 
 (async () => {
     
@@ -50,7 +60,7 @@ app.get('/github/:name', (req, res)=> {
     // Endpoint: http://localhost:4000/github/uqutub
     res.json({
         username: req.params.name,
-        githutb: `https://api.github.com/users/${req.params.name}`,
+        github: `https://api.github.com/users/${req.params.name}`,
     })
 })
 
